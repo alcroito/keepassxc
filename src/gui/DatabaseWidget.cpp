@@ -1813,7 +1813,7 @@ bool DatabaseWidget::save()
     m_blockAutoSave = true;
     ++m_saveAttempts;
 
-    auto focusWidget = qApp->focusWidget();
+    QPointer<QWidget> focusWidget(qApp->focusWidget());
 
     // TODO: Make this async
     // Lock out interactions
