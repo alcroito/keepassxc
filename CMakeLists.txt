@@ -423,6 +423,7 @@ set(CMAKE_AUTORCC ON)
 
 if(APPLE)
     set(CMAKE_MACOSX_RPATH TRUE)
+    set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
     find_program(MACDEPLOYQT_EXE macdeployqt HINTS ${Qt5_PREFIX}/bin ENV PATH)
     if(NOT MACDEPLOYQT_EXE)
         message(FATAL_ERROR "macdeployqt is required to build on macOS")
