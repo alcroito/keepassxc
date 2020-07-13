@@ -46,6 +46,9 @@ public:
     void setCaseSensitive(bool state);
     void setLimitGroup(bool state);
 
+signals:
+    void escapePressed();
+
 protected:
     // Filter key presses in the search field
     bool eventFilter(QObject* obj, QEvent* event) override;
@@ -54,7 +57,6 @@ signals:
     void search(const QString& text);
     void caseSensitiveChanged(bool state);
     void limitGroupChanged(bool state);
-    void escapePressed();
     void copyPressed();
     void downPressed();
     void enterPressed();

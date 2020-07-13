@@ -16,33 +16,25 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEEPASSX_URLEDIT_H
-#define KEEPASSX_URLEDIT_H
+#ifndef KEEPASSX_USERNAMEEDIT_H
+#define KEEPASSX_USERNAMEEDIT_H
 
-#include <QAction>
 #include <QLineEdit>
-#include <QPointer>
 
 class Database;
 
-class URLEdit : public QLineEdit
+class UserNameEdit : public QLineEdit
 {
     Q_OBJECT
-
 public:
-    explicit URLEdit(QWidget* parent = nullptr);
-    void enableVerifyMode();
+    explicit UserNameEdit(QWidget* parent = nullptr);
     void setDatabase(QSharedPointer<Database> db);
 
 protected:
     void contextMenuEvent(QContextMenuEvent* event) override;
 
-private slots:
-    void updateStylesheet();
-
 private:
-    QPointer<QAction> m_errorAction;
     QSharedPointer<Database> m_database;
 };
 
-#endif // KEEPASSX_URLEDIT_H
+#endif // KEEPASSX_USERNAMEEDIT_H

@@ -23,6 +23,7 @@
 #include <QMenu>
 #include <QShortcut>
 #include <QToolButton>
+#include <QDebug>
 
 #include "core/Config.h"
 #include "core/Resources.h"
@@ -53,7 +54,7 @@ SearchWidget::SearchWidget(QWidget* parent)
     connect(this, SIGNAL(escapePressed()), m_ui->searchEdit, SLOT(clear()));
 
     new QShortcut(QKeySequence::Find, this, SLOT(searchFocus()), nullptr, Qt::ApplicationShortcut);
-    new QShortcut(Qt::Key_Escape, m_ui->searchEdit, SLOT(clear()), nullptr, Qt::ApplicationShortcut);
+//    new QShortcut(Qt::Key_Escape, m_ui->searchEdit, SLOT(clear()), nullptr, Qt::ApplicationShortcut);
 
     m_ui->searchEdit->setPlaceholderText(tr("Search (%1)...", "Search placeholder text, %1 is the keyboard shortcut")
                                              .arg(QKeySequence(QKeySequence::Find).toString(QKeySequence::NativeText)));
@@ -94,6 +95,7 @@ bool SearchWidget::eventFilter(QObject* obj, QEvent* event)
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Escape) {
+            qDebug() << "SearchWidget::escapePressed";
             emit escapePressed();
             return true;
         } else if (keyEvent->matches(QKeySequence::Copy)) {

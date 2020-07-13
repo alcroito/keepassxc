@@ -16,33 +16,21 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEEPASSX_URLEDIT_H
-#define KEEPASSX_URLEDIT_H
+#include "UserNameEdit.h"
 
-#include <QAction>
-#include <QLineEdit>
-#include <QPointer>
+#include "gui/InsertReferenceWidget.h"
 
-class Database;
-
-class URLEdit : public QLineEdit
+UserNameEdit::UserNameEdit(QWidget* parent) : QLineEdit(parent)
 {
-    Q_OBJECT
 
-public:
-    explicit URLEdit(QWidget* parent = nullptr);
-    void enableVerifyMode();
-    void setDatabase(QSharedPointer<Database> db);
+}
 
-protected:
-    void contextMenuEvent(QContextMenuEvent* event) override;
+void UserNameEdit::contextMenuEvent(QContextMenuEvent *event)
+{
+    InsertReferenceWidget::handleContextMenuEvent(this, event, m_database);
+}
 
-private slots:
-    void updateStylesheet();
-
-private:
-    QPointer<QAction> m_errorAction;
-    QSharedPointer<Database> m_database;
-};
-
-#endif // KEEPASSX_URLEDIT_H
+void UserNameEdit::setDatabase(QSharedPointer<Database> db)
+{
+    m_database = db;
+}

@@ -24,6 +24,7 @@
 #include <QPointer>
 
 class QDialog;
+class Database;
 
 class PasswordEdit : public QLineEdit
 {
@@ -34,6 +35,7 @@ public:
     void enablePasswordGenerator();
     void setRepeatPartner(PasswordEdit* repeatEdit);
     bool isPasswordVisible() const;
+    void setDatabase(QSharedPointer<Database> db);
 
 public slots:
     void setShowPassword(bool show);
@@ -41,6 +43,7 @@ public slots:
 
 protected:
     bool event(QEvent* event) override;
+    void contextMenuEvent(QContextMenuEvent* event) override;
 
 signals:
     void capslockToggled(bool capslockOn);
@@ -59,6 +62,7 @@ private:
     QPointer<QAction> m_capslockAction;
     QPointer<PasswordEdit> m_repeatPasswordEdit;
     QPointer<PasswordEdit> m_parentPasswordEdit;
+    QSharedPointer<Database> m_database;
     bool m_capslockState = false;
 };
 

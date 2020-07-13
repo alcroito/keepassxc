@@ -61,6 +61,7 @@
 #include "gui/FileDialog.h"
 #include "gui/Font.h"
 #include "gui/MessageBox.h"
+#include "gui/UserNameEdit.h"
 #include "gui/entry/AutoTypeAssociationsModel.h"
 #include "gui/entry/EntryAttachmentsModel.h"
 #include "gui/entry/EntryAttributesModel.h"
@@ -150,6 +151,7 @@ void EditEntryWidget::setupMain()
     addPage(tr("Entry"), Resources::instance()->icon("document-edit"), m_mainWidget);
 
     m_mainUi->usernameComboBox->setEditable(true);
+    m_mainUi->usernameComboBox->setLineEdit(new UserNameEdit());
     m_usernameCompleter->setCompletionMode(QCompleter::InlineCompletion);
     m_usernameCompleter->setCaseSensitivity(Qt::CaseSensitive);
     m_usernameCompleter->setModel(m_usernameCompleterModel);
@@ -824,6 +826,14 @@ void EditEntryWidget::loadEntry(Entry* entry,
     showApplyButton(!m_create);
 
     setModified(false);
+
+    // Pass database object to the "insert reference" dialog via the line edit widgets.
+    auto userNameComboBoxLineEdit =
+            qobject_cast<UserNameEdit*>(m_mainUi->usernameComboBox->lineEdit());
+    Q_ASSERT(userNameComboBoxLineEdit);
+    userNameComboBoxLineEdit->setDatabase(m_db);
+    m_mainUi->passwordEdit->setDatabase(m_db);
+    m_mainUi->urlEdit->setDatabase(m_db);
 }
 
 void EditEntryWidget::setForms(Entry* entry, bool restore)

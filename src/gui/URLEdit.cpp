@@ -25,6 +25,7 @@
 #include "core/Tools.h"
 #include "gui/Font.h"
 #include "gui/styles/StateColorPalette.h"
+#include "gui/InsertReferenceWidget.h"
 
 URLEdit::URLEdit(QWidget* parent)
     : QLineEdit(parent)
@@ -57,4 +58,14 @@ void URLEdit::updateStylesheet()
         m_errorAction->setVisible(false);
         setStyleSheet("");
     }
+}
+
+void URLEdit::contextMenuEvent(QContextMenuEvent *event)
+{
+    InsertReferenceWidget::handleContextMenuEvent(this, event, m_database);
+}
+
+void URLEdit::setDatabase(QSharedPointer<Database> db)
+{
+    m_database = db;
 }

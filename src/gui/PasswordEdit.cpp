@@ -22,6 +22,7 @@
 #include "core/Resources.h"
 #include "gui/Font.h"
 #include "gui/PasswordGeneratorWidget.h"
+#include "gui/InsertReferenceWidget.h"
 #include "gui/osutils/OSUtils.h"
 #include "gui/styles/StateColorPalette.h"
 
@@ -132,6 +133,11 @@ bool PasswordEdit::isPasswordVisible() const
     return echoMode() == QLineEdit::Normal;
 }
 
+void PasswordEdit::setDatabase(QSharedPointer<Database> db)
+{
+    m_database = db;
+}
+
 void PasswordEdit::popupPasswordGenerator()
 {
     auto generator = PasswordGeneratorWidget::popupGenerator(this);
@@ -184,6 +190,11 @@ bool PasswordEdit::event(QEvent* event)
         checkCapslockState();
     }
     return QLineEdit::event(event);
+}
+
+void PasswordEdit::contextMenuEvent(QContextMenuEvent *event)
+{
+     InsertReferenceWidget::handleContextMenuEvent(this, event, m_database);
 }
 
 void PasswordEdit::checkCapslockState()

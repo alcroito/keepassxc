@@ -118,6 +118,7 @@ set(keepassx_SOURCES
         gui/FileDialog.cpp
         gui/Font.cpp
         gui/IconModels.cpp
+        gui/InsertReferenceWidget.cpp
         gui/KeePass1OpenWidget.cpp
         gui/KMessageWidget.cpp
         gui/LineEdit.cpp
@@ -136,6 +137,7 @@ set(keepassx_SOURCES
         gui/TotpExportSettingsDialog.cpp
         gui/DatabaseOpenDialog.cpp
         gui/URLEdit.cpp
+        gui/UserNameEdit.cpp
         gui/WelcomeWidget.cpp
         gui/csvImport/CsvImportWidget.cpp
         gui/csvImport/CsvImportWizard.cpp
